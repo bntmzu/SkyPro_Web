@@ -1,0 +1,31 @@
+__pycache__/
+*.py[cod]
+*.sqlite3
+*.db
+
+# Virtual envs
+venv/
+env/
+.venv/
+
+# PyCharm
+.idea/
+
+staticfiles/
+static_root/
+
+# Poetry files
+poetry.lock
+
+# Python test/cache
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.log
+*.pot
+
+# OS files
+.DS_Store
+Thumbs.db
