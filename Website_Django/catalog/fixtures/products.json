@@ -1,0 +1,41 @@
+[
+{
+  "model": "catalog.product",
+  "pk": 1,
+  "fields": {
+    "name": "Smartphone",
+    "description": "Android phone",
+    "picture": "",
+    "category": 2,
+    "price": "499.00",
+    "created_at": "2025-06-22T13:06:07.044Z",
+    "updated_at": "2025-06-22T13:06:07.044Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 2,
+  "fields": {
+    "name": "T-shirt",
+    "description": "Cotton, unisex",
+    "picture": "",
+    "category": 3,
+    "price": "19.99",
+    "created_at": "2025-06-22T13:07:00.764Z",
+    "updated_at": "2025-06-22T13:07:00.764Z"
+  }
+},
+{
+  "model": "catalog.product",
+  "pk": 3,
+  "fields": {
+    "name": "Novel",
+    "description": "Fiction book",
+    "picture": "",
+    "category": 1,
+    "price": "14.99",
+    "created_at": "2025-06-22T13:07:29.995Z",
+    "updated_at": "2025-06-22T13:07:29.995Z"
+  }
+}
+]
