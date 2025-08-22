@@ -9,6 +9,16 @@
  </p>
 
 <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+    <div class="col">
+        <a href="{% url 'catalog:product_create' %}" class="text-decoration-none">
+          <div class="card h-100 text-center border-2" style="border-style: dashed;">
+            <div class="card-body d-flex flex-column justify-content-center">
+              <div class="display-6 mb-2">+</div>
+              <div class="fw-semibold">Add new product</div>
+            </div>
+          </div>
+        </a>
+    </div>
     {% for product in page_obj %}
     <div class="col">
         <div class="card h-100 text-center">
