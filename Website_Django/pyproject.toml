@@ -1,5 +1,5 @@
 [project]
-name = "django"
+name = "website-django"
 version = "0.1.0"
 description = ""
 authors = [
@@ -8,7 +8,11 @@ authors = [
 readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
-    "black (>=25.1.0,<26.0.0)"
+    "django (>=5.2.3,<6.0.0)",
+    "psycopg2-binary (>=2.9.10,<3.0.0)",
+    "pillow (>=11.2.1,<12.0.0)",
+    "python-decouple (>=3.8,<4.0)",
+    "ipython (>=9.3.0,<10.0.0)"
 ]
 
 

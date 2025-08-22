@@ -1,11 +1,12 @@
+{% load static %}
 <!doctype html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Home Page</title>
-    <link href="css/bootstrap.css" rel="stylesheet">
-    <link href="css/styles.css" rel="stylesheet">
+    <link href="../../static/css/bootstrap.css" rel="stylesheet">
+    <link href="../../static/css/styles.css" rel="stylesheet">
 </head>
 <body>
 <div class="d-flex">
@@ -17,7 +18,7 @@
 
         <ul class="nav flex-column">
             <li class="nav-item mb-2">
-                <a class="nav-link active" href="home.html">Home</a>
+                <a class="nav-link" href="{% url 'catalog:home' %}">Home</a>
             </li>
             <li class="nav-item mb-2">
                 <a class="nav-link" href="categories.html">Categories</a>
@@ -26,7 +27,7 @@
                 <a class="nav-link" href="#">Orders</a>
             </li>
             <li class="nav-item mb-2">
-                <a class="nav-link" href="contacts.html">Contacts</a>
+                <a class="nav-link" href="{% url 'catalog:contacts' %}">Contacts</a>
             </li>
         </ul>
 
@@ -43,7 +44,8 @@
         <div class="row justify-content-center">
             <div class="col-md-4">
               <div class="card p-4 shadow-sm">
-                <form method="POST" action="/">
+                <form method="POST" action="">
+                    {% csrf_token %}
                     <div class="mb-3">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" name="name" id="name" placeholder="Your name">
@@ -57,6 +59,12 @@
                         <textarea class="form-control" name="message" id="message" rows="3" placeholder="Your message"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Send</button>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                           <div class="alert alert-success">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
                 </form>
               </div>
             </div>
