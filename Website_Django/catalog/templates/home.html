@@ -1,91 +1,48 @@
-{% load static %}
-<!doctype html>
+{% extends 'base.html' %}
 
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home Page</title>
-    <link href="../../static/css/bootstrap.css" rel="stylesheet">
-    <link href="../../static/css/styles.css" rel="stylesheet">
-</head>
-<body>
-<div class="d-flex">
-    <!-- Sidebar -->
-    <nav class="sidebar d-flex flex-column">
-        <div class="mb-4">
-            <h4>Menu</h4>
-        </div>
+{% block title %}Home{% endblock %}
 
-        <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-                <a class="nav-link" href="{% url 'catalog:home' %}">Home</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link" href="../../../categories.html">Categories</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link" href="#">Orders</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link" href="{% url 'catalog:contacts' %}">Contacts</a>
-            </li>
-        </ul>
+{% block content %}
+<h1 class="text-center mb-4">Home</h1>
+<p class="text-center mb-5 text-muted">
+    You are on a website designed for selling products.
+ </p>
 
-        <div class="mt-auto pt-4">
-            <a class="d-block" href="#">Profile</a>
-            <a class="d-block" href="#">Logout</a>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="main-content flex-grow-1">
-        <h1 class="text-center mb-4">Home</h1>
-        <p class="text-center mb-5 text-muted">
-            You are on a website designed for selling products.
-        </p>
-
-        <div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 1</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">$100</h6>
-                        <p class="card-text small">
-                            10 users included, 2 GB of storage, Email support, Help center access
-                        </p>
-                        <a href="#" class="btn btn-outline-primary">Buy</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 2</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">$100</h6>
-                        <p class="card-text small">
-                            10 users included, 2 GB of storage, Email support, Help center access
-                        </p>
-                        <a href="#" class="btn btn-outline-primary">Buy</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col">
-                <div class="card h-100 text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">Product 3</h5>
-                        <h6 class="card-subtitle mb-2 text-muted">$100</h6>
-                        <p class="card-text small">
-                            10 users included, 2 GB of storage, Email support, Help center access
-                        </p>
-                        <a href="#" class="btn btn-outline-primary">Buy</a>
-                    </div>
-                </div>
+<div class="row row-cols-1 row-cols-md-3 g-4 justify-content-center">
+    {% for product in page_obj %}
+    <div class="col">
+        <div class="card h-100 text-center">
+            {% if product.picture %}
+            <img src="{{ product.picture.url }}" class="card-img-top" alt="{{ product.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">${{ product.price }}</h6>
+                <p class="card-text small">{{ product.description|truncatechars:100 }}</p>
+                <a href="{% url 'catalog:product_detail' product.pk %}" class="btn btn-outline-primary">View</a>
             </div>
         </div>
-    </main>
-</div>
-</body>
-</html>
+    </div>
+    {% empty %}
+    <p class="text-center text-muted">No products yet.</p>
+    {% endfor %}
+ </div>
+
+{% if page_obj.paginator.num_pages > 1 %}
+<nav aria-label="Products pagination" class="mt-4">
+  <ul class="pagination justify-content-center">
+    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1">Previous</a>
+    </li>
+    {% for num in page_obj.paginator.page_range %}
+      <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+        <a class="page-link" href="?page={{ num }}">{{ num }}</a>
+      </li>
+    {% endfor %}
+    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+    </li>
+  </ul>
+ </nav>
+{% endif %}
+{% endblock %}

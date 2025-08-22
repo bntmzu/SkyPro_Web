@@ -1,88 +1,49 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home Page</title>
-    <link href="../../static/css/bootstrap.css" rel="stylesheet">
-    <link href="../../static/css/styles.css" rel="stylesheet">
-</head>
-<body>
-<div class="d-flex">
-    <!-- Sidebar -->
-    <nav class="sidebar d-flex flex-column">
-        <div class="mb-4">
-            <h4>Menu</h4>
-        </div>
+{% extends 'base.html' %}
 
-        <ul class="nav flex-column">
-            <li class="nav-item mb-2">
-                <a class="nav-link" href="{% url 'catalog:home' %}">Home</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link" href="categories.html">Categories</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link" href="#">Orders</a>
-            </li>
-            <li class="nav-item mb-2">
-                <a class="nav-link" href="{% url 'catalog:contacts' %}">Contacts</a>
-            </li>
-        </ul>
+{% block title %}Contacts{% endblock %}
 
-        <div class="mt-auto pt-4">
-            <a class="d-block" href="#">Profile</a>
-            <a class="d-block" href="#">Logout</a>
-        </div>
-    </nav>
+{% block content %}
+<h1 class="text-center mb-5">Contacts</h1>
 
-    <!-- Main Content -->
-    <main class="main-content flex-grow-1">
-        <h1 class="text-center mb-5">Contacts</h1>
-
-        <div class="row justify-content-center">
-            <div class="col-md-4">
-              <div class="card p-4 shadow-sm">
-                <form method="POST" action="">
-                    {% csrf_token %}
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" name="name" id="name" placeholder="Your name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" name="email" id="email" placeholder="Your email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea class="form-control" name="message" id="message" rows="3" placeholder="Your message"></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Send</button>
-
-                    {% if messages %}
-                        {% for message in messages %}
-                           <div class="alert alert-success">{{ message }}</div>
-                        {% endfor %}
-                    {% endif %}
-                </form>
-              </div>
+<div class="row justify-content-center">
+    <div class="col-md-4">
+      <div class="card p-4 shadow-sm">
+        <form method="POST" action="">
+            {% csrf_token %}
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" name="name" id="name" placeholder="Your name">
             </div>
-
-            <div class="col-md-5">
-                <h5>Our contacts</h5>
-                <p>
-                    If you have any questions, feedback, or would like to get in touch with our team,
-                    feel free to contact us through the form on the left. We are always happy to hear from you!
-                </p>
-                <p>
-                    You can also reach us by email or phone.
-                    Our customer support team is available Monday to Friday
-                    from 9:00 AM to 6:00 PM to assist you with any inquiries.
-                </p>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="Your email">
             </div>
-        </div>
-    </main>
+            <div class="mb-3">
+                <label for="message" class="form-label">Message</label>
+                <textarea class="form-control" name="message" id="message" rows="3" placeholder="Your message"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Send</button>
+
+            {% if messages %}
+                {% for message in messages %}
+                   <div class="alert alert-success">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        </form>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+        <h5>Our contacts</h5>
+        <p>
+            If you have any questions, feedback, or would like to get in touch with our team,
+            feel free to contact us through the form on the left. We are always happy to hear from you!
+        </p>
+        <p>
+            You can also reach us by email or phone.
+            Our customer support team is available Monday to Friday
+            from 9:00 AM to 6:00 PM to assist you with any inquiries.
+        </p>
+    </div>
 </div>
-</body>
-</html>
+{% endblock %}
