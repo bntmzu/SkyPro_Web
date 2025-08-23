@@ -1,0 +1,27 @@
+<nav class="sidebar d-flex flex-column">
+  <div class="mb-4">
+    <h4>Menu</h4>
+  </div>
+
+  <ul class="nav flex-column">
+    <li class="nav-item mb-2">
+      <a class="nav-link" href="{% url 'catalog:home' %}">Home</a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link" href="#">Categories</a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link" href="#">Orders</a>
+    </li>
+    <li class="nav-item mb-2">
+      <a class="nav-link" href="{% url 'catalog:contacts' %}">Contacts</a>
+    </li>
+  </ul>
+
+  <div class="mt-auto pt-4">
+    <a class="d-block" href="#">Profile</a>
+    <a class="d-block" href="#">Logout</a>
+  </div>
+</nav>
+
+

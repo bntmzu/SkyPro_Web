@@ -1,0 +1,21 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Catalog{% endblock %}</title>
+  <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+  <link href="{% static 'css/styles.css' %}" rel="stylesheet">
+</head>
+<body>
+<div class="d-flex">
+  {% include 'includes/main_menu.html' %}
+  <main class="main-content flex-grow-1 p-3">
+    {% block content %}{% endblock %}
+  </main>
+</div>
+</body>
+</html>
+
+
