@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h1 class="mb-0">Blog</h1>
+  <a class="btn btn-primary" href="{% url 'blog:post_create' %}">New post</a>
+ </div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  {% for post in page_obj %}
+  <div class="col">
+    <div class="card h-100">
+      {% if post.preview %}
+      <img src="{% if post.preview %}{{ post.preview.url }}{% endif %}" class="card-img-top" alt="{{ post.title }}">
+      {% endif %}
+      <div class="card-body">
+        <h5 class="card-title">{{ post.title }}</h5>
+        <p class="card-text small text-muted mb-1">{{ post.created_at|date:'Y-m-d H:i' }}</p>
+        <p class="card-text">{{ post.content|truncatechars:120 }}</p>
+        <a href="{% url 'blog:post_detail' post.pk %}" class="btn btn-outline-primary">Read</a>
+      </div>
+    </div>
+  </div>
+  {% empty %}
+  <p class="text-muted">No posts yet.</p>
+  {% endfor %}
+</div>
+
+{% if page_obj.paginator.num_pages > 1 %}
+<nav class="mt-4" aria-label="Blog pagination">
+  <ul class="pagination justify-content-center">
+    <li class="page-item {% if not page_obj.has_previous %}disabled{% endif %}">
+      <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+    </li>
+    {% for num in page_obj.paginator.page_range %}
+      <li class="page-item {% if page_obj.number == num %}active{% endif %}"><a class="page-link" href="?page={{ num }}">{{ num }}</a></li>
+    {% endfor %}
+    <li class="page-item {% if not page_obj.has_next %}disabled{% endif %}">
+      <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+    </li>
+  </ul>
+ </nav>
+{% endif %}
+{% endblock %}

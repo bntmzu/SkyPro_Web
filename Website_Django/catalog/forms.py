@@ -29,7 +29,10 @@ class ProductForm(forms.ModelForm):
             ),
             "category": forms.Select(attrs={"class": "form-select"}),
             "price": forms.TextInput(
-                attrs={"class": "form-control", "placeholder": "0.00", "inputmode": "decimal"}
+                attrs={
+                    "class": "form-control",
+                    "placeholder": "0.00",
+                    "inputmode": "decimal",
+                }
             ),
         }
-

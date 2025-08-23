@@ -1,0 +1,18 @@
+from django.db import models
+
+
+class Post(models.Model):
+    title = models.CharField(max_length=200)
+    content = models.TextField()
+    preview = models.ImageField(upload_to="blog/", blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    is_published = models.BooleanField(default=False)
+    views_count = models.PositiveIntegerField(default=0)
+
+    class Meta:
+        ordering = ["-created_at"]
+        verbose_name = "Post"
+        verbose_name_plural = "Posts"
+
+    def __str__(self):
+        return self.title

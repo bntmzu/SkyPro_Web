@@ -46,4 +46,3 @@ class ProductCreateView(CreateView):
 
     def get_success_url(self):
         return reverse_lazy("catalog:product_detail", kwargs={"pk": self.object.pk})
- 
